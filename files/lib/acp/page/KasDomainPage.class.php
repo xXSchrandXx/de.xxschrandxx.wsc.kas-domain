@@ -18,9 +18,21 @@ class KasDomainPage extends AbstractPage
     public function readParameters()
     {
         $this->domains = KasDomainCacheBuilder::getInstance()->getData();
-        $this->subDomains = KasSubDomainCacheBuilder::getInstance()->getData();
 
-        wcfDebug($this->domains, $this->subDomains);
+        foreach (KasSubDomainCacheBuilder::getInstance()->getData() as $subDomain) {
+            if (!preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $subDomain['subdomain_name'], $regs)) {
+                continue;
+            }
+            foreach ($this->domains as &$domain) {
+                if ($domain['domain_name'] !== $regs['domain']) {
+                    continue;
+                }
+                $domain['sub_domains'][] = $subDomain;
+                break;
+            }
+        }
+
+        wcfDebug($this->domains);
     }
 
     /**
@@ -32,8 +44,7 @@ class KasDomainPage extends AbstractPage
 
         // assign sorting parameters
         WCF::getTPL()->assign([
-            'domains' => $this->domains,
-            'subDomains' => $this->subDomains
+            'domains' => $this->domains
         ]);
     }
 }

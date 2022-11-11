@@ -7,6 +7,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use wcf\acp\page\KasDomainPage;
 use wcf\action\AbstractAction;
 use wcf\system\cache\builder\KasDomainCacheBuilder;
+use wcf\system\cache\builder\KasSubDomainCacheBuilder;
 use wcf\system\request\LinkHandler;
 
 final class KasDomainResetListAction extends AbstractAction
@@ -19,6 +20,7 @@ final class KasDomainResetListAction extends AbstractAction
         parent::execute();
 
         KasDomainCacheBuilder::getInstance()->reset();
+        KasSubDomainCacheBuilder::getInstance()->reset();
 
         $this->executed();
 
