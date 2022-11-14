@@ -6,12 +6,16 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use wcf\acp\page\KasDomainPage;
 use wcf\action\AbstractAction;
-use wcf\system\cache\builder\KasDomainCacheBuilder;
-use wcf\system\cache\builder\KasSubDomainCacheBuilder;
 use wcf\system\request\LinkHandler;
+use wcf\util\KasDomainUtil;
 
 final class KasDomainResetListAction extends AbstractAction
 {
+    /**
+     * @inheritDoc
+     */
+    public $neededPermission = ['admin.kas.canManageDomains'];
+
     /**
      * @inheritDoc
      */
@@ -19,8 +23,8 @@ final class KasDomainResetListAction extends AbstractAction
     {
         parent::execute();
 
-        KasDomainCacheBuilder::getInstance()->reset();
-        KasSubDomainCacheBuilder::getInstance()->reset();
+        KasDomainUtil::resetDomains();
+        KasDomainUtil::resetSubDomains();
 
         $this->executed();
 
