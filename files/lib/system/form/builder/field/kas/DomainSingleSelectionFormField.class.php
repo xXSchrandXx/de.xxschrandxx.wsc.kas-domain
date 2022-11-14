@@ -24,7 +24,7 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
                 'label' => $domain['domain_name'],
                 'value' => $domain['domain_name']
             ]);
-            if (!isset($domain['sub_domains'])) {
+            if (!isset($domain['subdomains'])) {
                 continue;
             }
             foreach ($domain['subdomains'] as $subDomain) {
