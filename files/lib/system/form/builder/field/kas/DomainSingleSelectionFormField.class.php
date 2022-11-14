@@ -17,6 +17,12 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
     {
         $this->label('wcf.global.kasDomain');
         $options = [];
+        \array_push($options, [
+            'depth' => 0,
+            'isSelectable' => 1,
+            'label' => 'wcf.global.language.noSelection',
+            'value' => 'none'
+        ]);
         foreach (KasDomainUtil::getDomainsWithSubDomains() as $domain) {
             \array_push($options, [
                 'depth' => 0,
@@ -30,13 +36,13 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
             foreach ($domain['subdomains'] as $subDomain) {
                 \array_push($options, [
                     'depth' => 1,
-                    'isSelectable' => $subDomain['is_active'] === 'Y' ? 1 : 0,
+                    'isSelectable' => 1,
                     'label' => $subDomain['subdomain_name'],
                     'value' => $subDomain['subdomain_name']
                 ]);
             }
         }
-        $this->options($options, true, false);
+        $this->options($options, true);
     }
 
     /**
