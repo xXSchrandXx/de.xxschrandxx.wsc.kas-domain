@@ -2,9 +2,9 @@
 
 namespace wcf\system\form\builder\field\kas;
 
-use wcf\system\cache\builder\KasDomainCacheBuilder;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TDefaultIdFormField;
+use wcf\util\KasDomainUtil;
 
 class DomainSingleSelectionFormField extends SingleSelectionFormField
 {
@@ -17,15 +17,26 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
     {
         $this->label('wcf.global.kasDomain');
         $options = [];
-        foreach (KasDomainCacheBuilder::getInstance()->getData() as $domain) {
-            if ($domain['is_active'] === 'N') {
+        foreach (KasDomainUtil::getDomainsWithSubDomains() as $domain) {
+            \array_push($options, [
+                'depth' => 0,
+                'isSelectable' => $domain['is_active'] === 'Y' ? 1 : 0,
+                'label' => $domain['domain_name'],
+                'value' => $domain['domain_name']
+            ]);
+            if (!isset($domain['sub_domains'])) {
                 continue;
             }
-            \array_push($options, $domain['domain_name']);
+            foreach ($domain['subdomains'] as $subDomain) {
+                \array_push($options, [
+                    'depth' => 1,
+                    'isSelectable' => $subDomain['is_active'] === 'Y' ? 1 : 0,
+                    'label' => $subDomain['subdomain_name'],
+                    'value' => $subDomain['subdomain_name']
+                ]);
+            }
         }
-        $this->options([
-            $options
-        ], false, false);
+        $this->options($options, true, false);
     }
 
     /**
