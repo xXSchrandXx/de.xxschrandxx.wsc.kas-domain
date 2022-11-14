@@ -26,6 +26,14 @@
 						<td class="columnTitle">{$domain['domain_name']}</td>
 						<td class="columnBoolean">{$domain['is_active']}</td>
 					</tr>
+					{if $domain['subdomains']|isset}
+						{foreach from=$domain['subdomains'] item=subdomain}
+							<tr>
+								<td class="columnTitle" style="text-indent: 10px">{$subdomain['subdomain_name']}</td>
+								<td class="columnBoolean">{$subdomain['is_active']}</td>
+							</tr>
+						{/foreach}
+					{/if}
 				{/foreach}
 			</tbody>
 		</table>
