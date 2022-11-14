@@ -4,6 +4,8 @@ namespace wcf\system\form\builder\field\kas;
 
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TDefaultIdFormField;
+use wcf\system\form\builder\field\validation\FormFieldValidationError;
+use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\util\KasDomainUtil;
 
 class DomainSingleSelectionFormField extends SingleSelectionFormField
@@ -15,7 +17,7 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
      */
     public function __construct()
     {
-        $this->label('wcf.global.kasDomain');
+        $this->label('wcf.global.form.kasDomain');
         $options = [];
         \array_push($options, [
             'depth' => 0,
@@ -23,6 +25,16 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
             'label' => 'wcf.global.language.noSelection',
             'value' => 'none'
         ]);
+        $this->addValidator(new FormFieldValidator('checkSelection', function (DomainSingleSelectionFormField $field) {
+            if ($field->getSaveValue() === 'none') {
+                $field->addValidationError(
+                    new FormFieldValidationError(
+                        'checkSelection',
+                        'wcf.global.form.kasDomain.error.checkSelection'
+                    )
+                );
+            }
+        }));
         foreach (KasDomainUtil::getDomainsWithSubDomains() as $domain) {
             \array_push($options, [
                 'depth' => 0,
