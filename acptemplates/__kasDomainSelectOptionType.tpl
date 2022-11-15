@@ -7,5 +7,5 @@
         {/foreach}
     </select>
 {else}
-    <p class="info">{lang}wcf.acp.kasDomainSelectOptionType.noServer{/lang}</p>
+    <p class="info">{lang}wcf.global.form.kasDomainSelectOptionType.noServer{/lang}</p>
 {/if}

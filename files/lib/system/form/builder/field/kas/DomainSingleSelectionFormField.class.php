@@ -6,6 +6,7 @@ use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TDefaultIdFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
+use wcf\system\WCF;
 use wcf\util\KasDomainUtil;
 
 class DomainSingleSelectionFormField extends SingleSelectionFormField
@@ -22,7 +23,7 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
         \array_push($options, [
             'depth' => 0,
             'isSelectable' => 1,
-            'label' => 'wcf.global.language.noSelection',
+            'label' => WCF::getLanguage()->get('wcf.label.none'),
             'value' => 'none'
         ]);
         $this->addValidator(new FormFieldValidator('checkSelection', function (DomainSingleSelectionFormField $field) {
@@ -30,7 +31,7 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
                 $field->addValidationError(
                     new FormFieldValidationError(
                         'checkSelection',
-                        'wcf.global.form.kasDomain.error.checkSelection'
+                        'wcf.global.language.noSelection'
                     )
                 );
             }
@@ -54,7 +55,7 @@ class DomainSingleSelectionFormField extends SingleSelectionFormField
                 ]);
             }
         }
-        $this->options($options, true);
+        $this->options($options, true, false);
     }
 
     /**
