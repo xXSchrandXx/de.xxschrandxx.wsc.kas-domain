@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language languagecode="de"
+	xmlns="https://www.woltlab.com"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/5.5/language.xsd">
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.admin.kas.canManageDomains"><![CDATA[Kann Domains verwalten]]></item>
+	</category>
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.configuration.kas.kasDomainPage"><![CDATA[Domains]]></item>
+	</category>
+	<category name="wcf.global.form">
+		<item name="wcf.global.form.kasDomain"><![CDATA[Domain]]></item>
+		<item name="wcf.global.form.kasDomainSelectOptionType.noServer"><![CDATA[Keine Domain gefunden.]]></item>
+	</category>
+	<category name="wcf.acp.page">
+		<item name="wcf.acp.page.kasDomain.title"><![CDATA[Domains]]></item>
+		<item name="wcf.acp.page.kasDomain.button.clear"><![CDATA[Domains neu abrufen]]></item>
+		<item name="wcf.acp.page.kasDomain.clear.sure"><![CDATA[Sollen alle gecachten Domains gelöscht und erneut abgefragt werden?]]></item>
+		<item name="wcf.acp.page.kasDomain.domain_name"><![CDATA[Domain]]></item>
+		<item name="wcf.acp.page.kasDomain.is_active"><![CDATA[Aktiv]]></item>
+	</category>
+</language>
