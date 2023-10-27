@@ -9,7 +9,7 @@
 				return false;
 			" 
 			href="{link controller='KasDomainResetList'}{/link}" class="button">
-				<span class="icon icon16 fa-refresh"></span>
+				{icon name='refresh'}
 				<span>{lang}wcf.acp.page.kasDomain.button.clear{/lang}</span>
 		</a>
 	</li>

@@ -12,7 +12,7 @@
 </header>
 
 {if $domains|count}
-	<div class="section">
+	<div class="section tabularBox">
 		<table class="table">
 			<thead>
 				<tr>
